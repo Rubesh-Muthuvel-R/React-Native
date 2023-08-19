@@ -12,7 +12,7 @@ export const Header  = () => {
 const styles = StyleSheet.create({
     main:{
         flex:0.1,
-        top:10,
-        left:10
+        paddingTop:20,
+        paddingLeft:20,
     }
 })

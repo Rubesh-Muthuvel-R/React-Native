@@ -1,31 +1,8 @@
 import React from 'react';
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-import{ SplashScreen} from './components/SplashScreen/SplashScreen';
-import { ProfileScreen } from './components/ProfileScreen';
+import Main from './components/Main';
 
-function App(){
-
+export default function App(){
   return(
-    <SafeAreaView style={styles.bg}>
-      {/* <SplashScreen /> */}
-      <ProfileScreen/>
-    </SafeAreaView>
-)
+      <Main/>
+  )
 }
-
-const styles = StyleSheet.create({
-  bg:{
-    flex:1,
-  }
-});
-
-export default App;

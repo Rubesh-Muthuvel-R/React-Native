@@ -14,24 +14,21 @@ interface Detailprops {
     MobileNumber: string;
 }
 
-export const Main = ({Detail}: Detailprops[]) => {
+export const Main = ({Name,Role,Organization,MobileNumber,Distributor}: Detailprops) => {
     return (
         <View style = {styles.main}>
-            <List title={"Mobile Number"} prop={Detail[0].MobileNumber} name={"phone"}/>
-            <List title={"Name"} prop={Detail[0].Name} name={"person"}/>
-            <List title={"Role"} prop={Detail[0].Role} name={"adjust"}/>
-            <List title={"Organization"} prop={Detail[0].Organization} name={"apartment"}/>
-            <List title={"Distributor"} prop={Detail[0].Distributor} name={"boy"}/>
+            <List title={"Mobile Number"} prop={MobileNumber} name={"phone"}/>
+            <List title={"Name"} prop={Name} name={"person"}/>
+            <List title={"Role"} prop={Role} name={"adjust"}/>
+            <List title={"Organization"} prop={Organization} name={"apartment"}/>
+            <List title={"Distributor"} prop={Distributor} name={"boy"}/>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     main:{
-        borderBottomColor:"white",
-        border:10,
-        flex:2,
-        top:50,
+        top:40,
         color:"black"
     }
 })

@@ -2,7 +2,13 @@ import React from "react"
 import {View,StyleSheet,Text} from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-export const List = ({title,prop,name}:string) =>{
+interface props {
+    title:string,
+    prop:string,
+    name:string
+}
+
+export const List = ({title,prop,name}:props) =>{
     return(
         <View style = {styles.main}>
             <View style = {styles.icon}>
@@ -19,12 +25,13 @@ export const List = ({title,prop,name}:string) =>{
 
 const styles = StyleSheet.create({
     main:{
-        padding:10,
-        flexDirection:"row",
-        borderBlockColor:"black",
+        padding:8,
+        marginRight:20,
+        marginLeft:20,
+        marginTop:10,
         backgroundColor:"white",
-        margin:10,
-        borderRadius:10,
+        flexDirection:"row",
+        borderRadius:5,
     },
     icon:{
         justifyContent:"center",

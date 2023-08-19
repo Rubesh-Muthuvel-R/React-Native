@@ -1,21 +1,28 @@
 import React from "react"
-import { StyleSheet, Text, View } from "react-native"
-import {Header,Main,Footer} from "./components/index";
+import { StyleSheet } from "react-native"
+import {Header,Main} from "./components/index";
 import detail from "./components/Data/data.json"
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 export const ProfileScreen  = () => {
     return (
-        <View style={styles.main}>
+        <SafeAreaView style={styles.main}>
             <Header/>
-            <Main Detail={detail} />
-            <Footer/>
-        </View>
+            <Main 
+                Name={detail[0].Name} 
+                Role={detail[0].Role} 
+                Organization={detail[0].Organization} 
+                MobileNumber={detail[0].MobileNumber} 
+                Distributor={detail[0].Distributor}
+            />
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     main:{
         flex:1,
-        backgroundColor:"#E2DFD2"
+        backgroundColor:"#F1F1F1"
     }
 })
