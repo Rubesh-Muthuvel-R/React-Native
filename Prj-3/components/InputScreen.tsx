@@ -10,13 +10,20 @@ import {
   
 import Icon from "../assets/logo.png";
 import axios from "axios";
-import {Details} from "./getDetails";
 
+type Details = {
+    login:string,
+    id:number,
+    type:string,
+    created_at:string,
+    updated_at:string,
+    public_repos:number
+}
 
 export const InputScreen = () =>{
     const [name,setName] = useState<string>("");
     const [userDetails,setUserDetails] = useState<Details|null>(null);
-
+    
     // const getDetails = async (username:string):Promise<Details> =>{
     //     const url = `https://api.github.com/users/${username}`;
     //     const res = await fetch(url);
