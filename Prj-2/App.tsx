@@ -8,7 +8,8 @@ export type RootStackParamList = {
   Home: undefined;
   Profile: {
     name:MutableRefObject<string>,
-    role:MutableRefObject<string>,
+    // role:MutableRefObject<string>,
+    role:string,
     organization:MutableRefObject<string>,
     distributor:MutableRefObject<string>,
     mobilenumber:MutableRefObject<string>

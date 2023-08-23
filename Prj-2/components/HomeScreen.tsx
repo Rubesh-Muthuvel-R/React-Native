@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
-import { StyleSheet, Text, ImageBackground,Button, KeyboardAvoidingView, Platform } from "react-native";
+import React, { useRef, useState } from "react";
+import { StyleSheet, Text, ImageBackground,Button, KeyboardAvoidingView, Platform, Alert, View } from "react-native";
 import { TextInput, SafeAreaView } from "react-native";
 import bg from "../assets/bg-1.jpg";
+import {Picker} from "@react-native-picker/picker";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {RootStackParamList} from "../App";
 
@@ -9,23 +10,21 @@ type HomeProps = NativeStackScreenProps<RootStackParamList,'Home'>;
 
 export const HomeScreen = ({navigation}:HomeProps) => {
     const name = useRef("");
-    const role = useRef("");
+    // const role = useRef("");
+    const [role,setRole] = useState("");
     const organization = useRef("");
     const distributor = useRef("");
-    const mobilenumber = useRef("+");
-
-    console.log(mobilenumber.current);
-    console.log(name);
-    console.log(role);
-    console.log(organization);
-    console.log(distributor);
-
+    const mobilenumber = useRef("");
 
     const setName = (val:string)=>{name.current = val};
-    const setRole = (val:string)=>{role.current = val};
+    // const setRole = (val:string)=>{role.current = val};
     const setOrg = (val:string)=>{organization.current = val};
     const setDist = (val:string)=>{distributor.current = val};
     const setNum = (val:string)=>{mobilenumber.current = val};
+
+    const notEmpty = (str:string):boolean =>{
+        return str.length>0;
+    }
 
     return(
         <ImageBackground source={bg} style={styles.container} resizeMode="cover">
@@ -37,7 +36,17 @@ export const HomeScreen = ({navigation}:HomeProps) => {
             <TextInput style={styles.input} placeholder="" onChange={(event)=>{setName(event.nativeEvent.text)}}/>
             
             <Text style={styles.label}>Role</Text>
-            <TextInput style={styles.input} placeholder="" onChange={(event)=>{setRole(event.nativeEvent.text)}}/>
+            <View style={{borderColor:"black",borderWidth:1,marginBottom:10}}>
+                <Picker 
+                    style={styles.comboBox} 
+                    selectedValue={role}
+                    dropdownIconColor="black"
+                    onValueChange={(itemValue:string)=>{setRole(itemValue)}}
+                    >
+                    <Picker.Item label="Intern" value="Intern"></Picker.Item>
+                    <Picker.Item label="FTE" value="FTE"></Picker.Item>    
+                </Picker>
+            </View>
             
             <Text style={styles.label}>Organization</Text>
             <TextInput style={styles.input} placeholder="" onChange={(event)=>{setOrg(event.nativeEvent.text)}}/>
@@ -59,10 +68,27 @@ export const HomeScreen = ({navigation}:HomeProps) => {
                 color={"#D03772"} 
                 onPress={
                     ()=>{
-                        navigation.push(
-                            'Profile',
-                            {name,role,organization,distributor,mobilenumber}
-                        )
+                        let chk:boolean = 
+                            notEmpty(name.current) && 
+                            notEmpty(role) && 
+                            notEmpty(organization.current) && 
+                            notEmpty(distributor.current) &&
+                            notEmpty(mobilenumber.current) ? true :false;
+
+
+                        if(chk){
+                            let isNumber = (str:string)=>{return (/^\d{10}/).test(str);}
+                            if(isNumber((mobilenumber.current))  ){
+                                navigation.push(
+                                    'Profile',
+                                    {name,role,organization,distributor,mobilenumber}
+                                )
+                            }else{
+                                Alert.alert("Please check your contact");
+                            }
+                        }else{
+                            Alert.alert("Please fill all fields")
+                        }
                     }
                 }
             />
@@ -76,10 +102,6 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems:"center",
         justifyContent:'center'
-    },
-
-    keyContainer:{
-        flex:1
     },
 
     header:{
@@ -102,5 +124,8 @@ const styles = StyleSheet.create({
         borderBottomColor:"black",
         width:"auto",
         fontSize:15
+    },
+    comboBox:{
+        color:"black",
     }
 })
